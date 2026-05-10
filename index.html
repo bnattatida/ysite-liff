@@ -269,13 +269,12 @@ function render() {
 
   const inp = document.getElementById("searchInput");
   if (inp) {
-    inp.focus();
-    inp.addEventListener("input", e => { query = e.target.value; render(); });
-    inp.addEventListener("keydown", e => { if (e.key === "Enter") inp.blur(); });
+    inp.addEventListener("input", e => { query = e.target.value; render(); }, { once: true });
+    inp.addEventListener("keydown", e => { if (e.key === "Enter") inp.blur(); }, { once: true });
   }
   const clr = document.getElementById("clearBtn");
   if (clr) {
-    clr.addEventListener("click", () => { query = ""; render(); });
+    clr.addEventListener("click", () => { query = ""; render(); }, { once: true });
   }
 }
 
