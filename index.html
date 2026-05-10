@@ -6,157 +6,82 @@
 <title>Y-site Compatibility</title>
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
   :root {
-    --blue: #09379b;
-    --blue-light: #1a4fbe;
-    --blue-pale: #EFF6FF;
-    --blue-border: #DBEAFE;
-    --green: #059669;
-    --green-bg: #ECFDF5;
-    --red: #DC2626;
-    --text: #1E293B;
-    --muted: #64748B;
-    --divider: #E2E8F0;
-    --white: #FFFFFF;
-    --card-bg: #F8FAFF;
+    --blue:#09379b; --blue-pale:#EFF6FF; --blue-border:#DBEAFE;
+    --text:#1E293B; --muted:#64748B; --divider:#E2E8F0; --white:#FFFFFF;
   }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:'Sarabun',sans-serif;background:#F1F5F9;color:var(--text);min-height:100vh;padding-bottom:120px}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  .header{background:var(--blue);padding:16px 16px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(9,55,155,.3)}
+  .header-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .header-icon{font-size:24px}
+  .header-title{color:#fff;font-size:18px;font-weight:700}
+  .header-sub{color:#BFDBFE;font-size:12px;margin-top:2px}
 
-  body {
-    font-family: 'Sarabun', sans-serif;
-    background: #F1F5F9;
-    color: var(--text);
-    min-height: 100vh;
-    padding-bottom: 120px;
-  }
+  .search-wrap{position:relative}
+  .search-input{width:100%;padding:10px 40px 10px 14px;border-radius:10px;border:none;font-family:'Sarabun',sans-serif;font-size:15px;background:rgba(255,255,255,.15);color:#fff;outline:none}
+  .search-input::placeholder{color:rgba(255,255,255,.6)}
+  .search-input:focus{background:rgba(255,255,255,.22)}
+  .search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.7);font-size:18px;cursor:pointer;padding:4px;display:none}
 
-  .header {
-    background: var(--blue);
-    padding: 16px 16px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(9,55,155,0.3);
-  }
-  .header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .header-icon { font-size: 24px; }
-  .header-title { color: white; font-size: 18px; font-weight: 700; }
-  .header-sub { color: #BFDBFE; font-size: 12px; margin-top: 2px; }
+  .selected-bar{background:#fff;padding:10px 16px;border-bottom:1px solid var(--divider);display:none}
+  .selected-label{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+  .pills{display:flex;flex-wrap:wrap;gap:6px}
+  .pill{display:flex;align-items:center;gap:5px;background:var(--blue);color:#fff;border-radius:20px;padding:4px 10px 4px 12px;font-size:13px;font-weight:600;animation:popIn .2s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+  .pill-remove{background:rgba(255,255,255,.3);border:none;color:#fff;border-radius:50%;width:18px;height:18px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
 
-  .search-wrap { position: relative; }
-  .search-input {
-    width: 100%;
-    padding: 10px 40px 10px 14px;
-    border-radius: 10px;
-    border: none;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 15px;
-    background: rgba(255,255,255,0.15);
-    color: white;
-    outline: none;
-    backdrop-filter: blur(4px);
-  }
-  .search-input::placeholder { color: rgba(255,255,255,0.6); }
-  .search-input:focus { background: rgba(255,255,255,0.22); }
-  .search-clear {
-    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-    background: none; border: none; color: rgba(255,255,255,0.7);
-    font-size: 18px; cursor: pointer; display: none; padding: 4px;
-  }
+  .section-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:14px 16px 6px}
+  .drug-list{padding:0 12px;display:flex;flex-direction:column;gap:6px}
+  .drug-item{background:#fff;border:1.5px solid var(--divider);border-radius:12px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .15s;user-select:none;-webkit-user-select:none}
+  .drug-item:active{transform:scale(.98)}
+  .drug-item.selected{border-color:var(--blue);background:var(--blue-pale)}
+  .drug-item.disabled{opacity:.4;pointer-events:none}
+  .drug-name{font-size:15px;font-weight:600;color:var(--text)}
+  .drug-item.selected .drug-name{color:var(--blue)}
+  .drug-check{width:24px;height:24px;border-radius:50%;border:2px solid var(--divider);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;color:transparent;transition:all .15s}
+  .drug-item.selected .drug-check{background:var(--blue);border-color:var(--blue);color:#fff}
 
-  .selected-bar { background: var(--white); padding: 10px 16px; border-bottom: 1px solid var(--divider); display: none; }
-  .selected-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
-  .pills { display: flex; flex-wrap: wrap; gap: 6px; }
-  .pill {
-    display: flex; align-items: center; gap: 5px;
-    background: var(--blue); color: white; border-radius: 20px;
-    padding: 4px 10px 4px 12px; font-size: 13px; font-weight: 600;
-    animation: popIn 0.2s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .pill-remove {
-    background: rgba(255,255,255,0.3); border: none; color: white;
-    border-radius: 50%; width: 18px; height: 18px; font-size: 12px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; line-height: 1; padding: 0;
-  }
+  .empty{text-align:center;padding:48px 24px;color:var(--muted);display:none}
+  .empty-icon{font-size:40px;margin-bottom:12px}
+  .empty-text{font-size:15px}
 
-  .section-title { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; padding: 14px 16px 6px; }
-  .drug-list { padding: 0 12px; display: flex; flex-direction: column; gap: 6px; }
-  .drug-item {
-    background: var(--white); border: 1.5px solid var(--divider); border-radius: 12px;
-    padding: 12px 14px; display: flex; align-items: center; justify-content: space-between;
-    cursor: pointer; transition: all 0.15s; -webkit-user-select: none; user-select: none;
-  }
-  .drug-item:active { transform: scale(0.98); }
-  .drug-item.selected { border-color: var(--blue); background: var(--blue-pale); }
-  .drug-item.disabled { opacity: 0.4; pointer-events: none; }
-  .drug-name { font-size: 15px; font-weight: 600; color: var(--text); }
-  .drug-item.selected .drug-name { color: var(--blue); }
-  .drug-check {
-    width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--divider);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    transition: all 0.15s; font-size: 13px; color: transparent;
-  }
-  .drug-item.selected .drug-check { background: var(--blue); border-color: var(--blue); color: white; }
+  .bottom-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--divider);padding:12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom));z-index:100;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+  .count-text{font-size:12px;color:var(--muted);text-align:center;margin-bottom:8px}
+  .count-text span{font-weight:700;color:var(--blue)}
+  .btn-submit{width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:12px;font-family:'Sarabun',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .btn-submit:disabled{background:#CBD5E1;cursor:not-allowed}
+  .btn-submit:not(:disabled):active{transform:scale(.98)}
 
-  .empty { text-align: center; padding: 48px 24px; color: var(--muted); }
-  .empty-icon { font-size: 40px; margin-bottom: 12px; }
-  .empty-text { font-size: 15px; }
+  .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:16px;color:var(--muted)}
+  .spinner{width:36px;height:36px;border:3px solid var(--blue-border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
 
-  .bottom-bar {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    background: var(--white); border-top: 1px solid var(--divider);
-    padding: 12px 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom));
-    z-index: 100; box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-  }
-  .count-text { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 8px; }
-  .count-text span { font-weight: 700; color: var(--blue); }
-  .btn-submit {
-    width: 100%; padding: 14px; background: var(--blue); color: white; border: none;
-    border-radius: 12px; font-family: 'Sarabun', sans-serif; font-size: 16px; font-weight: 700;
-    cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .btn-submit:disabled { background: #CBD5E1; cursor: not-allowed; }
-  .btn-submit:not(:disabled):active { transform: scale(0.98); }
-
-  .loading { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 16px; color: var(--muted); }
-  .spinner { width: 36px; height: 36px; border: 3px solid var(--blue-border); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .max-warning { background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 8px; padding: 8px 12px; font-size: 12px; color: #92400E; text-align: center; margin: 8px 12px 0; display: none; }
+  .max-warning{background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:8px 12px;font-size:12px;color:#92400E;text-align:center;margin:8px 12px 0;display:none}
 </style>
 </head>
 <body>
-
 <div id="app">
-  <div class="loading">
-    <div class="spinner"></div>
-    <div>กำลังโหลด...</div>
-  </div>
+  <div class="loading"><div class="spinner"></div><div>กำลังโหลด...</div></div>
 </div>
 
 <script>
 const MAX_DRUGS = 5;
-
-// ✅ แก้แล้ว: ตัด / ท้าย URL ออก ป้องกัน double slash (//drug-names)
 const WORKER_URL = "https://linebot-rx.ai-nattatidaing.workers.dev";
 
-let allDrugs = [];
-let selected = [];
-let query = "";
+let allDrugs = [], selected = [], query = "";
 
 async function init() {
   try {
     await liff.init({ liffId: "2010037688-GpdHShZK" });
     if (!liff.isLoggedIn()) { liff.login(); return; }
     await loadDrugs();
-    render();
-  } catch (e) {
+    buildUI();
+  } catch(e) {
     document.getElementById("app").innerHTML =
-      `<div class="loading"><div class="empty-icon">⚠️</div><div class="empty-text">เกิดข้อผิดพลาด กรุณาลองใหม่</div></div>`;
+      `<div class="loading"><div style="font-size:40px">⚠️</div><div>เกิดข้อผิดพลาด กรุณาลองใหม่</div></div>`;
   }
 }
 
@@ -164,50 +89,28 @@ async function loadDrugs() {
   try {
     const res = await fetch(`${WORKER_URL}/drug-names?type=ysite`);
     const data = await res.json();
-    allDrugs = (data.names || []).sort((a, b) => a.localeCompare(b));
-  } catch {
-    allDrugs = [];
-  }
+    allDrugs = (data.names || []).sort((a,b) => a.localeCompare(b));
+  } catch { allDrugs = []; }
 }
 
 function filtered() {
   if (!query) return allDrugs;
   const q = query.toLowerCase();
-  const starts = allDrugs.filter(d => d.toLowerCase().startsWith(q));
-  const includes = allDrugs.filter(d => !d.toLowerCase().startsWith(q) && d.toLowerCase().includes(q));
-  return [...starts, ...includes];
+  return [
+    ...allDrugs.filter(d => d.toLowerCase().startsWith(q)),
+    ...allDrugs.filter(d => !d.toLowerCase().startsWith(q) && d.toLowerCase().includes(q))
+  ];
 }
 
-function toggle(name) {
-  if (selected.includes(name)) {
-    selected = selected.filter(d => d !== name);
-  } else {
-    if (selected.length >= MAX_DRUGS) return;
-    selected = [...selected, name];
-  }
-  render();
+function esc(s) {
+  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function escAttr(s) {
+  return String(s||"").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 }
 
-function removePill(name) {
-  selected = selected.filter(d => d !== name);
-  render();
-}
-
-async function submit() {
-  if (selected.length < 2) return;
-  const text = selected.join(", ");
-  try {
-    await liff.sendMessages([{ type: "text", text }]);
-    liff.closeWindow();
-  } catch {
-    alert("ส่งยาแล้ว: " + text);
-  }
-}
-
-function render() {
-  const list = filtered();
-  const atMax = selected.length >= MAX_DRUGS;
-
+// ── สร้าง DOM ครั้งเดียว แล้ว update เฉพาะส่วนที่เปลี่ยน ──
+function buildUI() {
   document.getElementById("app").innerHTML = `
     <div class="header">
       <div class="header-top">
@@ -219,69 +122,129 @@ function render() {
       </div>
       <div class="search-wrap">
         <input class="search-input" type="text" placeholder="🔍  ค้นหาชื่อยา..."
-          value="${escHtml(query)}" id="searchInput" autocomplete="off" autocorrect="off" spellcheck="false"/>
-        <button class="search-clear" id="clearBtn" style="display:${query ? 'flex' : 'none'}">✕</button>
+          id="searchInput" autocomplete="off" autocorrect="off" spellcheck="false"/>
+        <button class="search-clear" id="clearBtn">✕</button>
       </div>
     </div>
 
-    ${selected.length > 0 ? `
-    <div class="selected-bar" style="display:block">
-      <div class="selected-label">เลือกแล้ว ${selected.length}/${MAX_DRUGS}</div>
-      <div class="pills">
-        ${selected.map(d => `
-          <div class="pill">${escHtml(d)}
-            <button class="pill-remove" onclick="removePill(${JSON.stringify(d)})">✕</button>
-          </div>`).join("")}
-      </div>
-    </div>` : ""}
+    <div class="selected-bar" id="selBar" style="display:none">
+      <div class="selected-label" id="selLabel"></div>
+      <div class="pills" id="pills"></div>
+    </div>
 
-    ${atMax ? `<div class="max-warning" style="display:block">⚠️ เลือกครบ ${MAX_DRUGS} ตัวแล้ว กดตรวจสอบ หรือลบยาออกก่อน</div>` : ""}
+    <div class="max-warning" id="maxWarn"></div>
 
-    ${list.length > 0 ? `
-    <div class="section-title">${query ? `ผลการค้นหา (${list.length})` : "รายการยาทั้งหมด"}</div>
-    <div class="drug-list">
-      ${list.map(name => {
-        const isSel = selected.includes(name);
-        const isDisabled = atMax && !isSel;
-        return `<div class="drug-item ${isSel ? "selected" : ""} ${isDisabled ? "disabled" : ""}"
-             onclick="toggle(${JSON.stringify(name)})">
-          <span class="drug-name">${escHtml(name)}</span>
-          <div class="drug-check">${isSel ? "✓" : ""}</div>
-        </div>`;
-      }).join("")}
-    </div>` : `
-    <div class="empty">
+    <div class="section-title" id="secTitle">รายการยาทั้งหมด</div>
+    <div class="drug-list" id="drugList"></div>
+
+    <div class="empty" id="emptyState">
       <div class="empty-icon">🔍</div>
-      <div class="empty-text">ไม่พบยา "${escHtml(query)}"</div>
-    </div>`}
+      <div class="empty-text" id="emptyText"></div>
+    </div>
 
     <div class="bottom-bar">
-      <div class="count-text">
-        ${selected.length < 2
-          ? `เลือกอีก <span>${2 - selected.length}</span> ตัวเพื่อตรวจสอบ`
-          : `พร้อมตรวจสอบ <span>${selected.length}</span> รายการ`}
-      </div>
-      <button class="btn-submit" ${selected.length < 2 ? "disabled" : ""} onclick="submit()">
-        ✅ ตรวจสอบเลย
-      </button>
+      <div class="count-text" id="countText"></div>
+      <button class="btn-submit" id="btnSubmit" disabled>✅ ตรวจสอบเลย</button>
     </div>
   `;
 
-  const inp = document.getElementById("searchInput");
-  if (inp) {
-    inp.addEventListener("input", e => { query = e.target.value; render(); }, { once: true });
-    inp.addEventListener("keydown", e => { if (e.key === "Enter") inp.blur(); }, { once: true });
-  }
-  const clr = document.getElementById("clearBtn");
-  if (clr) {
-    clr.addEventListener("click", () => { query = ""; render(); }, { once: true });
-  }
+  // ── Event delegation: จับ click ทั้งหน้าที่ #app ──
+  document.getElementById("app").addEventListener("click", function(e) {
+    // drug item
+    const item = e.target.closest(".drug-item");
+    if (item) {
+      if (item.classList.contains("disabled")) return;
+      const name = item.getAttribute("data-drug");
+      if (selected.includes(name)) {
+        selected = selected.filter(d => d !== name);
+      } else {
+        if (selected.length < MAX_DRUGS) selected = [...selected, name];
+      }
+      updateUI();
+      return;
+    }
+    // pill remove
+    const rem = e.target.closest(".pill-remove");
+    if (rem) {
+      const name = rem.getAttribute("data-remove");
+      selected = selected.filter(d => d !== name);
+      updateUI();
+      return;
+    }
+    // submit
+    if (e.target.closest("#btnSubmit")) { submit(); return; }
+    // clear
+    if (e.target.closest("#clearBtn")) {
+      query = "";
+      document.getElementById("searchInput").value = "";
+      updateUI();
+    }
+  });
+
+  document.getElementById("searchInput").addEventListener("input", function(e) {
+    query = e.target.value;
+    updateUI();
+  });
+
+  updateUI();
 }
 
-function escHtml(str) {
-  return String(str || "")
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+function updateUI() {
+  const list = filtered();
+  const atMax = selected.length >= MAX_DRUGS;
+
+  // selected bar
+  const selBar = document.getElementById("selBar");
+  selBar.style.display = selected.length > 0 ? "block" : "none";
+  document.getElementById("selLabel").textContent = `เลือกแล้ว ${selected.length}/${MAX_DRUGS}`;
+  document.getElementById("pills").innerHTML = selected.map(d =>
+    `<div class="pill">${esc(d)}<button class="pill-remove" data-remove="${escAttr(d)}">✕</button></div>`
+  ).join("");
+
+  // max warning
+  const maxWarn = document.getElementById("maxWarn");
+  maxWarn.style.display = atMax ? "block" : "none";
+  maxWarn.textContent = atMax ? `⚠️ เลือกครบ ${MAX_DRUGS} ตัวแล้ว กดตรวจสอบ หรือลบยาออกก่อน` : "";
+
+  // section title
+  document.getElementById("secTitle").textContent =
+    query ? `ผลการค้นหา (${list.length})` : "รายการยาทั้งหมด";
+
+  // drug list
+  document.getElementById("drugList").innerHTML = list.map(name => {
+    const isSel = selected.includes(name);
+    const isDis = atMax && !isSel;
+    return `<div class="drug-item${isSel?" selected":""}${isDis?" disabled":""}" data-drug="${escAttr(name)}">
+      <span class="drug-name">${esc(name)}</span>
+      <div class="drug-check">${isSel?"✓":""}</div>
+    </div>`;
+  }).join("");
+
+  // empty state
+  const emptyState = document.getElementById("emptyState");
+  emptyState.style.display = list.length === 0 ? "block" : "none";
+  document.getElementById("emptyText").textContent = `ไม่พบยา "${query}"`;
+
+  // count + submit
+  const countEl = document.getElementById("countText");
+  countEl.innerHTML = selected.length < 2
+    ? `เลือกอีก <span>${2 - selected.length}</span> ตัวเพื่อตรวจสอบ`
+    : `พร้อมตรวจสอบ <span>${selected.length}</span> รายการ`;
+  document.getElementById("btnSubmit").disabled = selected.length < 2;
+
+  // clear btn
+  document.getElementById("clearBtn").style.display = query ? "flex" : "none";
+}
+
+async function submit() {
+  if (selected.length < 2) return;
+  const text = selected.join(", ");
+  try {
+    await liff.sendMessages([{ type: "text", text }]);
+    liff.closeWindow();
+  } catch {
+    alert("ส่งยาแล้ว: " + text);
+  }
 }
 
 init();
