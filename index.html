@@ -33,7 +33,6 @@
     padding-bottom: 120px;
   }
 
-  /* ── Header ── */
   .header {
     background: var(--blue);
     padding: 16px 16px 20px;
@@ -42,20 +41,12 @@
     z-index: 100;
     box-shadow: 0 2px 12px rgba(9,55,155,0.3);
   }
-  .header-top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
+  .header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
   .header-icon { font-size: 24px; }
   .header-title { color: white; font-size: 18px; font-weight: 700; }
   .header-sub { color: #BFDBFE; font-size: 12px; margin-top: 2px; }
 
-  /* ── Search Box ── */
-  .search-wrap {
-    position: relative;
-  }
+  .search-wrap { position: relative; }
   .search-input {
     width: 100%;
     padding: 10px 40px 10px 14px;
@@ -71,223 +62,71 @@
   .search-input::placeholder { color: rgba(255,255,255,0.6); }
   .search-input:focus { background: rgba(255,255,255,0.22); }
   .search-clear {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.7);
-    font-size: 18px;
-    cursor: pointer;
-    display: none;
-    padding: 4px;
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: rgba(255,255,255,0.7);
+    font-size: 18px; cursor: pointer; display: none; padding: 4px;
   }
 
-  /* ── Selected Pills ── */
-  .selected-bar {
-    background: var(--white);
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--divider);
-    display: none;
-  }
-  .selected-label {
-    font-size: 11px;
-    color: var(--muted);
-    font-weight: 600;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+  .selected-bar { background: var(--white); padding: 10px 16px; border-bottom: 1px solid var(--divider); display: none; }
+  .selected-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; }
   .pill {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--blue);
-    color: white;
-    border-radius: 20px;
-    padding: 4px 10px 4px 12px;
-    font-size: 13px;
-    font-weight: 600;
+    display: flex; align-items: center; gap: 5px;
+    background: var(--blue); color: white; border-radius: 20px;
+    padding: 4px 10px 4px 12px; font-size: 13px; font-weight: 600;
     animation: popIn 0.2s cubic-bezier(0.34,1.56,0.64,1);
   }
-  @keyframes popIn {
-    from { transform: scale(0.7); opacity: 0; }
-    to   { transform: scale(1);   opacity: 1; }
-  }
+  @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   .pill-remove {
-    background: rgba(255,255,255,0.3);
-    border: none;
-    color: white;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    font-size: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    padding: 0;
+    background: rgba(255,255,255,0.3); border: none; color: white;
+    border-radius: 50%; width: 18px; height: 18px; font-size: 12px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; line-height: 1; padding: 0;
   }
 
-  /* ── Drug List ── */
-  .section-title {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    padding: 14px 16px 6px;
-  }
-
-  .drug-list {
-    padding: 0 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
+  .section-title { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; padding: 14px 16px 6px; }
+  .drug-list { padding: 0 12px; display: flex; flex-direction: column; gap: 6px; }
   .drug-item {
-    background: var(--white);
-    border: 1.5px solid var(--divider);
-    border-radius: 12px;
-    padding: 12px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: all 0.15s;
-    -webkit-user-select: none;
-    user-select: none;
+    background: var(--white); border: 1.5px solid var(--divider); border-radius: 12px;
+    padding: 12px 14px; display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; transition: all 0.15s; -webkit-user-select: none; user-select: none;
   }
   .drug-item:active { transform: scale(0.98); }
-  .drug-item.selected {
-    border-color: var(--blue);
-    background: var(--blue-pale);
-  }
-  .drug-item.disabled {
-    opacity: 0.4;
-    pointer-events: none;
-  }
-  .drug-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-  }
+  .drug-item.selected { border-color: var(--blue); background: var(--blue-pale); }
+  .drug-item.disabled { opacity: 0.4; pointer-events: none; }
+  .drug-name { font-size: 15px; font-weight: 600; color: var(--text); }
   .drug-item.selected .drug-name { color: var(--blue); }
-
   .drug-check {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 2px solid var(--divider);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.15s;
-    font-size: 13px;
-    color: transparent;
+    width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--divider);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all 0.15s; font-size: 13px; color: transparent;
   }
-  .drug-item.selected .drug-check {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: white;
-  }
+  .drug-item.selected .drug-check { background: var(--blue); border-color: var(--blue); color: white; }
 
-  /* ── Empty State ── */
-  .empty {
-    text-align: center;
-    padding: 48px 24px;
-    color: var(--muted);
-  }
+  .empty { text-align: center; padding: 48px 24px; color: var(--muted); }
   .empty-icon { font-size: 40px; margin-bottom: 12px; }
   .empty-text { font-size: 15px; }
 
-  /* ── Bottom Bar ── */
   .bottom-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--white);
-    border-top: 1px solid var(--divider);
-    padding: 12px 16px;
-    padding-bottom: calc(12px + env(safe-area-inset-bottom));
-    z-index: 100;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--white); border-top: 1px solid var(--divider);
+    padding: 12px 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 100; box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
   }
-  .count-text {
-    font-size: 12px;
-    color: var(--muted);
-    text-align: center;
-    margin-bottom: 8px;
-  }
-  .count-text span {
-    font-weight: 700;
-    color: var(--blue);
-  }
+  .count-text { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 8px; }
+  .count-text span { font-weight: 700; color: var(--blue); }
   .btn-submit {
-    width: 100%;
-    padding: 14px;
-    background: var(--blue);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    width: 100%; padding: 14px; background: var(--blue); color: white; border: none;
+    border-radius: 12px; font-family: 'Sarabun', sans-serif; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px;
   }
-  .btn-submit:disabled {
-    background: #CBD5E1;
-    cursor: not-allowed;
-  }
+  .btn-submit:disabled { background: #CBD5E1; cursor: not-allowed; }
   .btn-submit:not(:disabled):active { transform: scale(0.98); }
 
-  /* ── Loading ── */
-  .loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 60vh;
-    gap: 16px;
-    color: var(--muted);
-  }
-  .spinner {
-    width: 36px;
-    height: 36px;
-    border: 3px solid var(--blue-border);
-    border-top-color: var(--blue);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
+  .loading { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 16px; color: var(--muted); }
+  .spinner { width: 36px; height: 36px; border: 3px solid var(--blue-border); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── Max warning ── */
-  .max-warning {
-    background: #FEF3C7;
-    border: 1px solid #FDE68A;
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-size: 12px;
-    color: #92400E;
-    text-align: center;
-    margin: 8px 12px 0;
-    display: none;
-  }
+  .max-warning { background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 8px; padding: 8px 12px; font-size: 12px; color: #92400E; text-align: center; margin: 8px 12px 0; display: none; }
 </style>
 </head>
 <body>
@@ -301,16 +140,17 @@
 
 <script>
 const MAX_DRUGS = 5;
-const WORKER_URL = "https://linebot-rx.ai-nattatidaing.workers.dev/"; // ← เปลี่ยนเป็น URL Worker จริง
+
+// ✅ แก้แล้ว: ตัด / ท้าย URL ออก ป้องกัน double slash (//drug-names)
+const WORKER_URL = "https://linebot-rx.ai-nattatidaing.workers.dev";
 
 let allDrugs = [];
 let selected = [];
 let query = "";
 
-// ── Init LIFF ──
 async function init() {
   try {
-    await liff.init({ liffId: "2010037688-GpdHShZK" }); // ← เปลี่ยน LIFF ID
+    await liff.init({ liffId: "2010037688-GpdHShZK" });
     if (!liff.isLoggedIn()) { liff.login(); return; }
     await loadDrugs();
     render();
@@ -320,7 +160,6 @@ async function init() {
   }
 }
 
-// ── Load drug list from Worker ──
 async function loadDrugs() {
   try {
     const res = await fetch(`${WORKER_URL}/drug-names?type=ysite`);
@@ -331,7 +170,6 @@ async function loadDrugs() {
   }
 }
 
-// ── Filter ──
 function filtered() {
   if (!query) return allDrugs;
   const q = query.toLowerCase();
@@ -340,7 +178,6 @@ function filtered() {
   return [...starts, ...includes];
 }
 
-// ── Toggle select ──
 function toggle(name) {
   if (selected.includes(name)) {
     selected = selected.filter(d => d !== name);
@@ -356,7 +193,6 @@ function removePill(name) {
   render();
 }
 
-// ── Submit → ส่งกลับ LINE chat ──
 async function submit() {
   if (selected.length < 2) return;
   const text = selected.join(", ");
@@ -364,12 +200,10 @@ async function submit() {
     await liff.sendMessages([{ type: "text", text }]);
     liff.closeWindow();
   } catch {
-    // fallback: ถ้า sendMessages ไม่ได้ (เปิดจาก browser)
     alert("ส่งยาแล้ว: " + text);
   }
 }
 
-// ── Render ──
 function render() {
   const list = filtered();
   const atMax = selected.length >= MAX_DRUGS;
@@ -384,16 +218,8 @@ function render() {
         </div>
       </div>
       <div class="search-wrap">
-        <input
-          class="search-input"
-          type="text"
-          placeholder="🔍  ค้นหาชื่อยา..."
-          value="${escHtml(query)}"
-          id="searchInput"
-          autocomplete="off"
-          autocorrect="off"
-          spellcheck="false"
-        />
+        <input class="search-input" type="text" placeholder="🔍  ค้นหาชื่อยา..."
+          value="${escHtml(query)}" id="searchInput" autocomplete="off" autocorrect="off" spellcheck="false"/>
         <button class="search-clear" id="clearBtn" style="display:${query ? 'flex' : 'none'}">✕</button>
       </div>
     </div>
@@ -403,11 +229,9 @@ function render() {
       <div class="selected-label">เลือกแล้ว ${selected.length}/${MAX_DRUGS}</div>
       <div class="pills">
         ${selected.map(d => `
-          <div class="pill">
-            ${escHtml(d)}
+          <div class="pill">${escHtml(d)}
             <button class="pill-remove" onclick="removePill(${JSON.stringify(d)})">✕</button>
-          </div>
-        `).join("")}
+          </div>`).join("")}
       </div>
     </div>` : ""}
 
@@ -419,12 +243,11 @@ function render() {
       ${list.map(name => {
         const isSel = selected.includes(name);
         const isDisabled = atMax && !isSel;
-        return `
-          <div class="drug-item ${isSel ? "selected" : ""} ${isDisabled ? "disabled" : ""}"
-               onclick="toggle(${JSON.stringify(name)})">
-            <span class="drug-name">${escHtml(name)}</span>
-            <div class="drug-check">${isSel ? "✓" : ""}</div>
-          </div>`;
+        return `<div class="drug-item ${isSel ? "selected" : ""} ${isDisabled ? "disabled" : ""}"
+             onclick="toggle(${JSON.stringify(name)})">
+          <span class="drug-name">${escHtml(name)}</span>
+          <div class="drug-check">${isSel ? "✓" : ""}</div>
+        </div>`;
       }).join("")}
     </div>` : `
     <div class="empty">
@@ -444,17 +267,11 @@ function render() {
     </div>
   `;
 
-  // ── Search event ──
   const inp = document.getElementById("searchInput");
   if (inp) {
     inp.focus();
-    inp.addEventListener("input", e => {
-      query = e.target.value;
-      render();
-    });
-    inp.addEventListener("keydown", e => {
-      if (e.key === "Enter") inp.blur();
-    });
+    inp.addEventListener("input", e => { query = e.target.value; render(); });
+    inp.addEventListener("keydown", e => { if (e.key === "Enter") inp.blur(); });
   }
   const clr = document.getElementById("clearBtn");
   if (clr) {
@@ -464,10 +281,8 @@ function render() {
 
 function escHtml(str) {
   return String(str || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 init();
