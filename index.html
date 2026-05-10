@@ -301,7 +301,7 @@
 
 <script>
 const MAX_DRUGS = 5;
-const WORKER_URL = "https://YOUR_WORKER.workers.dev"; // ← เปลี่ยนเป็น URL Worker จริง
+const WORKER_URL = "https://linebot-rx.ai-nattatidaing.workers.dev/"; // ← เปลี่ยนเป็น URL Worker จริง
 
 let allDrugs = [];
 let selected = [];
@@ -310,7 +310,7 @@ let query = "";
 // ── Init LIFF ──
 async function init() {
   try {
-    await liff.init({ liffId: "YOUR_LIFF_ID" }); // ← เปลี่ยน LIFF ID
+    await liff.init({ liffId: "2010037688-GpdHShZK" }); // ← เปลี่ยน LIFF ID
     if (!liff.isLoggedIn()) { liff.login(); return; }
     await loadDrugs();
     render();
